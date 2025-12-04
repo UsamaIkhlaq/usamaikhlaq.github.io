@@ -4,216 +4,897 @@
   <meta charset="UTF-8" />
   <title>Usama Ikhlaq | Data & Machine Learning</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio of Usama Ikhlaq – data analysis, machine learning, IT systems and research projects." />
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f1fa.svg"
+  />
+
   <style>
+    :root {
+      --bg-dark: #050816;
+      --bg-panel: #050113;
+      --accent: #22c55e;
+      --accent-soft: #14b8a6;
+      --accent-warm: #a855f7;
+      --text-main: #e5e7eb;
+      --text-soft: #9ca3af;
+      --card-bg: #020617;
+      --border-soft: rgba(148, 163, 184, 0.35);
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.55);
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e1b4b 0, #020617 55%, #000 100%);
+      color: var(--text-main);
       line-height: 1.6;
-      color: #1f2933;
-      background: #f5f7fa;
+      scroll-behavior: smooth;
     }
-    header {
-      background: #0b7285;
-      color: #fff;
-      padding: 3rem 1.5rem;
-      text-align: center;
+    a { color: inherit; text-decoration: none; }
+
+    /* Top navigation */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.7), transparent);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.22);
     }
-    header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-    header p { font-size: 1.05rem; opacity: 0.95; }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto;
+      padding: 0.7rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand {
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      font-size: 0.9rem; color: var(--text-soft);
+    }
+    .nav-links {
+      display: flex; gap: 1.2rem;
+      font-size: 0.9rem; color: var(--text-soft);
+    }
+    .nav-links a {
+      position: relative; padding-bottom: 2px;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute; left: 0; bottom: 0;
+      height: 2px; width: 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+      transition: width 0.25s ease-out;
+    }
+    .nav-links a:hover::after { width: 100%; }
+
     main {
-      max-width: 960px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 2rem 1.5rem 3rem;
+      padding: 5.5rem 1.25rem 4rem;
     }
-    section { margin-bottom: 2rem; }
-    h2 {
-      font-size: 1.4rem;
-      margin-bottom: 0.75rem;
-      color: #0b7285;
-      border-bottom: 2px solid #e0e7ff;
-      padding-bottom: 0.3rem;
+
+    /* Hero with animated sky */
+    .hero {
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      padding: 2.5rem 2rem 2.75rem;
+      background:
+        radial-gradient(circle at 12% 0, rgba(45, 212, 191, 0.3), transparent 55%),
+        radial-gradient(circle at 88% 0, rgba(168, 85, 247, 0.25), transparent 55%),
+        linear-gradient(135deg, #020617, #020617);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 2.75rem;
+      min-height: 260px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 2rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
     }
-    p { margin-bottom: 0.75rem; }
-    .tagline {
-      font-size: 0.98rem;
-      max-width: 680px;
-      margin: 0.75rem auto 0;
+
+    /* Logo in top-right of hero */
+    .hero-logo {
+      position: absolute;
+      top: 1.6rem;
+      right: 1.8rem;
+      max-width: 220px;
+      width: 20%;
+      min-width: 120px;
+      height: auto;
+      display: block;
+      pointer-events: none;
+    }
+
+    .hero-sky {
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(34, 197, 94, 0.9), transparent 60%),
+        radial-gradient(circle at 80% 0%, rgba(14, 165, 233, 0.7), transparent 55%),
+        radial-gradient(circle at 50% 120%, rgba(248, 250, 252, 0.12), transparent 60%);
+      mix-blend-mode: screen;
+      opacity: 0.85;
+      pointer-events: none;
+      animation: drift 38s linear infinite alternate;
+    }
+    @keyframes drift {
+      0%   { transform: translate3d(-6%, -3%, 0) scale(1.02); }
+      50%  { transform: translate3d(4%, 5%, 0) scale(1.08); }
+      100% { transform: translate3d(-2%, 8%, 0) scale(1.04); }
+    }
+    .hero-inner { position: relative; z-index: 1; }
+    .eyebrow {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #bfdbfe;
+      margin-bottom: 0.7rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 3.1vw, 2.7rem);
+      margin-bottom: 0.65rem;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: #cbd5f5;
+      margin-bottom: 0.5rem;
+    }
+    .hero-note {
+      font-size: 0.86rem;
+      color: #a5b4fc;
+      margin-bottom: 1rem;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.1rem;
+    }
+    .badge {
+      padding: 0.18rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      color: #e5e7eb;
+    }
+    .hero p {
+      max-width: 32rem;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+    .hero-actions {
+      margin-top: 1.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.35rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent-soft), var(--accent-warm));
+      color: #0b1120;
+      font-weight: 500;
+      font-size: 0.92rem;
+      box-shadow: 0 12px 25px rgba(56, 189, 248, 0.45);
+      border: none;
+    }
+    .btn-ghost {
+      font-size: 0.88rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.85);
+      color: var(--text-soft);
+    }
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      justify-content: flex-end;
+    }
+    .hero-stats {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 20px;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.65);
+      font-size: 0.84rem;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .stat-label {
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .stat-value {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+    .chip-row span {
+      padding: 0.16rem 0.55rem;
+      border-radius: 999px;
+      border: 1px dashed rgba(148, 163, 184, 0.5);
+    }
+
+    section { margin-bottom: 2.5rem; }
+    .section-title {
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+    .section-sub {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 1.35rem;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
+      gap: 1.1rem;
     }
     .card {
-      background: #fff;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+      background: linear-gradient(145deg, #020617, #050816);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      padding: 1.05rem 1rem 1.1rem;
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.45);
+      font-size: 0.9rem;
     }
     .card h3 {
-      font-size: 1.05rem;
-      margin-bottom: 0.5rem;
-      color: #102a43;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
     }
-    ul { padding-left: 1.1rem; }
-    li { margin-bottom: 0.35rem; }
-    .pill-list {
+    .card p {
+      color: var(--text-soft);
+      margin-bottom: 0.4rem;
+    }
+    .card ul { padding-left: 1.15rem; color: var(--text-soft); }
+
+    .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.35rem;
+      margin-top: 0.45rem;
     }
     .pill {
-      background: #e3f6ff;
-      color: #0b7285;
-      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      padding: 0.18rem 0.6rem;
       border-radius: 999px;
-      font-size: 0.82rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-soft);
     }
-    .contact {
-      text-align: center;
-      margin-top: 1.5rem;
+
+    /* Contact panel */
+    .contact-panel {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), #020617);
+      border-radius: 26px;
+      padding: 1.9rem 1.6rem 1.8rem;
+      margin-top: 0.8rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
+      gap: 1.6rem;
+      border: 1px solid rgba(56, 189, 248, 0.5);
+      box-shadow: 0 22px 48px rgba(8, 47, 73, 0.85);
     }
-    .btn {
-      display: inline-block;
-      margin-top: 0.75rem;
-      padding: 0.6rem 1.4rem;
-      border-radius: 999px;
-      background: #0b7285;
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.95rem;
+    .contact-panel h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
     }
-    .links a {
-      margin-right: 0.75rem;
+    .contact-panel p {
       font-size: 0.9rem;
-      color: #0b7285;
-      text-decoration: none;
+      color: var(--text-soft);
+      max-width: 26rem;
     }
-    footer {
-      text-align: center;
+    .contact-meta {
+      margin-top: 0.8rem;
+      font-size: 0.86rem;
+      color: #e5e7eb;
+    }
+    .contact-meta a { color: var(--accent); }
+    .contact-form {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 18px;
+      padding: 1.1rem 1.1rem 1.2rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.88rem;
+    }
+    .form-row {
+      margin-bottom: 0.7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .form-row label {
       font-size: 0.8rem;
-      padding: 1.5rem 1rem 2rem;
-      color: #6b7280;
+      color: var(--text-soft);
+    }
+    .form-row input,
+    .form-row textarea {
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-main);
+      padding: 0.45rem 0.6rem;
+      font-size: 0.86rem;
+      outline: none;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus {
+      border-color: var(--accent-soft);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.6);
+    }
+    .form-row textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      margin-top: 0.35rem;
+    }
+    .btn-form {
+      margin-top: 0.6rem;
+      width: 100%;
+      padding: 0.55rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--accent-soft), var(--accent-warm));
+      color: #020617;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    footer {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.25rem 2.2rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.6rem;
+    }
+    footer a { color: var(--accent); }
+
+    /* Scroll animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1.9rem 1.4rem 2.1rem;
+      }
+      .hero-right { order: -1; }
+      .contact-panel {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav-inner { padding-inline: 1rem; }
+      .nav-links { gap: 0.8rem; font-size: 0.8rem; }
+      .hero-logo {
+        top: 1.2rem;
+        right: 1.2rem;
+        width: 26%;
+        max-width: 180px;
+      }
     }
   </style>
+
+  <!-- EmailJS library -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Usama Ikhlaq</h1>
-    <p>Data Analyst | Machine Learning Specialist | IT Systems & Research Consultant</p>
-    <p class="tagline">
-      Large-scale data mining, predictive modelling, and IT infrastructure skills used to turn raw data into clear, reliable decisions.
-    </p>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">Usama Ikhlaq</div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="about">
-      <h2>About</h2>
-      <p>
-        Data and IT professional with experience in analytics, machine learning, server management, and academic research across
-        Ireland, Italy, and Germany. Work includes predictive models for agriculture, social media analysis, fake-news detection,
-        and support for teaching in third-level institutes.
+    <section class="hero fade-in" id="top">
+      <div class="hero-sky" aria-hidden="true"></div>
+
+      <!-- Top-right logo inside hero -->
+      <img
+        class="hero-logo"
+        src="https://raw.githubusercontent.com/UsamaIkhlaq/usamaikhlaq.github.io/main/1_no_bg.png"
+        alt="It's all about U. logo"
+      />
+
+      <div class="hero-inner">
+        <div class="eyebrow">Data · Machine learning · IT systems</div>
+        <h1>Data analysis and modelling with a systems mindset</h1>
+        <p class="hero-sub" id="hero-typed">
+          Data analysis, machine learning and infrastructure skills used together for clear, reliable decisions.
+        </p>
+        <p class="hero-note">
+          Open for freelance work, research support and remote roles.
+        </p>
+        <div class="hero-badges">
+          <span class="badge">Large-scale data mining</span>
+          <span class="badge">Predictive modelling</span>
+          <span class="badge">Innovation licences (data methods)</span>
+          <span class="badge">MCSE · MCSA · MCITP</span>
+        </div>
+        <p>
+          Focus on turning messy data into simple, useful views. This includes project design, modelling,
+          dashboards, and clear writing for both technical and non-technical teams.
+        </p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#contact">Start a project</a>
+          <a class="btn-ghost" href="mailto:usamaikhlaq@gmail.com">Email: usamaikhlaq@gmail.com</a>
+        </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="hero-stats">
+          <div class="stat-grid">
+            <div>
+              <div class="stat-label">Experience</div>
+              <div class="stat-value">10+ years</div>
+              <div class="stat-label" style="margin-top:0.25rem;">Countries</div>
+              <div style="font-size:0.86rem;">Ireland · Italy · Germany · Pakistan</div>
+            </div>
+            <div>
+              <div class="stat-label">Focus</div>
+              <div style="font-size:0.9rem; margin-top:0.15rem;">
+                Data pipelines, prediction, dashboards, IT infrastructure and research support.
+              </div>
+            </div>
+          </div>
+          <div class="chip-row" style="margin-top:0.7rem;">
+            <span>Python · R · SQL</span>
+            <span>Power BI · Tableau</span>
+            <span>Linux · servers · networks</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" class="fade-in">
+      <h2 class="section-title">About</h2>
+      <p class="section-sub">
+        Data and IT professional with research experience in agriculture, social media analysis, and intelligent systems.
+        Work across Ireland, Italy and Germany has combined machine learning, server administration, and teaching in third-level institutes.
       </p>
-      <p>
-        Research work led to several original data mining frameworks and three Innovation Licences covering advanced methods in
-        large-scale data processing and predictive modelling. Aim in each project is simple: clean data, clear logic, and results
-        that are easy to use.
+      <p class="section-sub">
+        Research in large-scale data mining led to seven linked frameworks for structuring pre-processing, temporal alignment,
+        and model improvement. Three innovation licences cover these methods and show that the work is original and reusable in
+        other domains, including agriculture, business data and education.
       </p>
     </section>
 
-    <section id="services">
-      <h2>Services</h2>
+    <!-- Services -->
+    <section id="services" class="fade-in">
+      <h2 class="section-title">Services for clients</h2>
+      <p class="section-sub">
+        These service groups map directly to freelance briefs on platforms such as Upwork and Fiverr.
+        Each project can be scoped as a one-off job or an ongoing retainer.
+      </p>
       <div class="grid">
-        <div class="card">
-          <h3>Data Analysis & Modelling</h3>
+        <article class="card">
+          <h3>Data analysis &amp; prediction package</h3>
+          <p>Good fit when raw files already exist and answers are needed.</p>
           <ul>
-            <li>Data cleaning, preparation, and quality checks</li>
-            <li>Predictive models, regression, classification, clustering</li>
-            <li>NLP and sentiment analysis for text data</li>
-            <li>Project reports and clear explanations</li>
+            <li>Audit of current data and quick cleaning plan.</li>
+            <li>Models for forecasting, classification or clustering.</li>
+            <li>Short report that explains findings in plain language.</li>
           </ul>
-        </div>
-        <div class="card">
-          <h3>Dashboards & Visuals</h3>
+          <div class="pill-row">
+            <span class="pill">Python &amp; R</span>
+            <span class="pill">Forecasting</span>
+            <span class="pill">NLP / sentiment</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Dashboard &amp; reporting setup</h3>
+          <p>Ideal for managers who want a live view of key metrics.</p>
           <ul>
-            <li>Interactive dashboards in Power BI or Tableau</li>
-            <li>Excel automation and reporting packs</li>
-            <li>Monitoring views for business and research teams</li>
+            <li>Data model and measures in Power BI or Tableau.</li>
+            <li>Role-based views for management, field teams and finance.</li>
+            <li>Brief handover guide so the team can maintain the reports.</li>
           </ul>
-        </div>
-        <div class="card">
-          <h3>IT & Research Support</h3>
+          <div class="pill-row">
+            <span class="pill">Power BI</span>
+            <span class="pill">Tableau</span>
+            <span class="pill">Excel automation</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Big data &amp; search support</h3>
+          <p>Useful when logs, events or sensor streams need structure.</p>
           <ul>
-            <li>Server and network setup, Linux and Windows</li>
-            <li>Advice on data collection and storage layouts</li>
-            <li>Academic writing, documentation, and reviewing</li>
+            <li>Help with Hadoop / Spark jobs and data layout.</li>
+            <li>Elasticsearch and Kibana views for search and monitoring.</li>
+            <li>Guidance on indexing and retention plans.</li>
           </ul>
-        </div>
+          <div class="pill-row">
+            <span class="pill">Spark</span>
+            <span class="pill">Hadoop &amp; Hive</span>
+            <span class="pill">Elasticsearch</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>System health check</h3>
+          <p>For small and mid-size teams that need stable servers.</p>
+          <ul>
+            <li>Review of Windows and Linux servers.</li>
+            <li>Basic networking, backup and security checks.</li>
+            <li>Simple recommendation list ordered by impact.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">MCSE · MCSA · MCITP</span>
+            <span class="pill">Hyper-V / VMware</span>
+            <span class="pill">VOIP / Asterisk</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Research &amp; writing support</h3>
+          <p>Designed for academics, supervisors and technical founders.</p>
+          <ul>
+            <li>Help with experiment design and data sections.</li>
+            <li>Figures, tables and result summaries.</li>
+            <li>Clear descriptions of methods for theses and papers.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Academic writing</span>
+            <span class="pill">Literature review</span>
+            <span class="pill">MSc research</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Workflow automation &amp; AI assistants</h3>
+          <p>Helpful when repeated work, reports or checks are taking too much manual time.</p>
+          <ul>
+            <li>Python scripts and tools that join systems together (files, APIs, databases).</li>
+            <li>Personalised LLM modules to answer team questions, search documents and draft replies.</li>
+            <li>Small chat or web panels so users can trigger jobs in one click.</li>
+            <li>Clear handover notes so the team can run and update the automation.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Python automation</span>
+            <span class="pill">Custom LLM / ChatGPT</span>
+            <span class="pill">APIs &amp; webhooks</span>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section id="skills">
-      <h2>Core Skills</h2>
-      <div class="pill-list">
-        <span class="pill">Python (NumPy, Pandas, SciPy, scikit-learn)</span>
-        <span class="pill">Deep Learning (TensorFlow, Keras)</span>
-        <span class="pill">R (dplyr, ggplot2, regression)</span>
-        <span class="pill">SQL (MySQL, PostgreSQL)</span>
-        <span class="pill">Power BI</span>
-        <span class="pill">Tableau</span>
-        <span class="pill">Hadoop, Hive, Spark</span>
-        <span class="pill">Elasticsearch, Kibana</span>
-        <span class="pill">MCSE, MCSA, MCITP</span>
-        <span class="pill">Linux (Ubuntu, CentOS)</span>
-        <span class="pill">Teaching & mentoring</span>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>Sample Work</h2>
+    <section id="skills" class="fade-in">
+      <h2 class="section-title">Skills (ready for freelance work)</h2>
+      <p class="section-sub">
+        Skills are grouped in a way that matches common freelance and project needs: from analysis and code to systems and clear writing.
+      </p>
       <div class="grid">
-        <div class="card">
-          <h3>Smart Agriculture Modelling</h3>
-          <p>
-            Predictive models for nutrient application and crop timing, using soil and climate data. Work produced conference
-            papers and a set of reusable frameworks for large-scale data mining.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Social Media & Fake-News Analysis</h3>
-          <p>
-            Analysis of public posts and news content using sentiment and classification models to detect disinformation and
-            support policy decisions.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Teaching & Learning Support</h3>
-          <p>
-            Teaching and lab support for modules in programming, databases, business intelligence, and data analysis at third-level institutes in Ireland.
-          </p>
-        </div>
+        <article class="card">
+          <h3>Data analysis &amp; modelling</h3>
+          <ul>
+            <li>Data cleaning, processing, and transformation.</li>
+            <li>Predictive modelling and forecasting.</li>
+            <li>Classification and clustering.</li>
+            <li>Statistical analysis in Python and R.</li>
+            <li>NLP and sentiment analysis.</li>
+            <li>Feature engineering.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Programming &amp; tools</h3>
+          <ul>
+            <li>Python (NumPy, Pandas, SciPy, scikit-learn, TensorFlow, Keras).</li>
+            <li>R (dplyr, ggplot2, regression and multivariate analysis).</li>
+            <li>SQL (MySQL, PostgreSQL).</li>
+            <li>APIs and automation scripts.</li>
+            <li>Git and version control.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Dashboards &amp; visualisation</h3>
+          <ul>
+            <li>Power BI dashboard design.</li>
+            <li>Tableau reports and views.</li>
+            <li>Excel with advanced functions and automation.</li>
+            <li>Data storytelling and report writing.</li>
+            <li>Custom visual dashboards for different roles.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Big data &amp; search</h3>
+          <ul>
+            <li>Hadoop and Hive basics for batch data.</li>
+            <li>Spark for distributed processing.</li>
+            <li>Elasticsearch and Kibana for search and logs.</li>
+            <li>Handling distributed and large datasets.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>IT systems &amp; infrastructure</h3>
+          <ul>
+            <li>Microsoft certified (MCSE, MCSA, MCITP).</li>
+            <li>Server setup and administration.</li>
+            <li>Virtualisation (Hyper-V, VMware, VirtualBox).</li>
+            <li>Networking (TCP/IP, LAN/WAN, routing, DNS/DHCP).</li>
+            <li>Linux systems (Ubuntu, CentOS).</li>
+            <li>Asterisk and VOIP configuration.</li>
+            <li>Troubleshooting and system optimisation.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Research &amp; technical writing</h3>
+          <ul>
+            <li>Academic writing and documentation.</li>
+            <li>Research analysis and result summaries.</li>
+            <li>Experiment design and basic statistics.</li>
+            <li>Literature review and synthesis.</li>
+            <li>Report preparation and layout.</li>
+            <li>Support for data-driven decision making.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Soft skills</h3>
+          <ul>
+            <li>Clear written and spoken communication.</li>
+            <li>Reliable and careful with time.</li>
+            <li>Problem solving with a calm approach.</li>
+            <li>Ability to explain complex topics in simple terms.</li>
+            <li>Flexible, client-focused work style.</li>
+          </ul>
+        </article>
       </div>
     </section>
 
-    <section id="contact" class="contact">
-      <h2>Contact</h2>
-      <p>For freelance work, research support, or collaboration, contact using the links below.</p>
-      <div class="links">
-        <a href="mailto:usamaikhlaq@gmail.com">Email</a>
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://motivactive.com" target="_blank" rel="noopener">Motivactive</a>
+    <section id="projects" class="fade-in">
+      <h2 class="section-title">Selected work</h2>
+      <p class="section-sub">
+        Examples here are simplified for a public view. Full technical notes and reports are available on request.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Smart agriculture prediction</h3>
+          <p>
+            Field and soil data from farms used to train models that support fertiliser timing and rate decisions.
+            This reduced trial-and-error in the field and improved planning for agronomy teams.
+          </p>
+          <ul>
+            <li>Regression and ensemble models for nutrient levels.</li>
+            <li>Data quality checks and feature design for noisy sensor data.</li>
+            <li>Simple dashboard views for non-technical users.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Social media and risk signals</h3>
+          <p>
+            Work on EU-funded projects that studied online content, focusing on hostility, disinformation,
+            and early signs of harmful group activity.
+          </p>
+          <ul>
+            <li>Sentiment and topic analysis on multilingual text.</li>
+            <li>Labelling and training of classifiers.</li>
+            <li>Housing results in elastic search and visual boards.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Teaching-linked analytics</h3>
+          <p>
+            Support for modules in databases, programming, business intelligence and data analysis at third-level.
+            Assessment design aligned with realistic data tasks.
+          </p>
+          <ul>
+            <li>Lab material and step-by-step notebooks.</li>
+            <li>Marking support plus feedback templates.</li>
+            <li>Examples with climate, education and agriculture data.</li>
+          </ul>
+        </article>
       </div>
-      <a class="btn" href="mailto:usamaikhlaq@gmail.com">Send a project enquiry</a>
+    </section>
+
+    <section id="teaching" class="fade-in">
+      <h2 class="section-title">Innovation licences and teaching</h2>
+      <p class="section-sub">
+        Research in data mining produced several linked frameworks such as SOC, SSL, LLS, ASDM, EDSE, TPM and PME.
+        To recognise the originality of this work, three innovation licences cover large-scale pre-processing, advanced
+        mining methods and the combined framework group.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Innovation licences</h3>
+          <ul>
+            <li>IL1 – pre-processing methods for large data sets.</li>
+            <li>IL2 – advanced mining and model improvement methods.</li>
+            <li>IL3 – group licence covering SOC, SSL and LLS.</li>
+          </ul>
+          <p style="margin-top:0.5rem;">
+            These licences sit over a family of methods that can be adapted for any sector that needs repeatable data work,
+            from agriculture and retail to education.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Teaching and collaboration</h3>
+          <ul>
+            <li>Lecturing and lab support for data and computing modules.</li>
+            <li>Guidance for student projects in analysis and modelling.</li>
+            <li>Workshops on data handling for non-technical teams.</li>
+          </ul>
+          <p style="margin-top:0.5rem;">
+            Open to collaboration with universities, research groups and companies that need structured data support
+            around their current teams.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+      <div class="contact-panel">
+        <div>
+          <h2>Project ideas and collaboration</h2>
+          <p>
+            For freelance work, long-term projects or joint research, a short message with context is enough to start.
+            Helpful details include the sector, data sources, and what needs to change or improve.
+          </p>
+          <div class="contact-meta">
+            <p>Email: <a href="mailto:usamaikhlaq@gmail.com">usamaikhlaq@gmail.com</a></p>
+            <p>
+              LinkedIn:
+              <a href="https://www.linkedin.com/in/usamaikhlaq" target="_blank" rel="noopener">
+                linkedin.com/in/usamaikhlaq
+              </a>
+            </p>
+            <p>Location: Ireland (open to remote and hybrid work in Europe and beyond).</p>
+          </div>
+        </div>
+
+        <!-- Contact form using EmailJS -->
+        <form class="contact-form" onsubmit="return handleForm(this);">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input id="name" name="name" autocomplete="name" />
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="form-row">
+            <label for="message">Short message</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Project idea, data source, and rough timelines."
+            ></textarea>
+          </div>
+          <p class="form-note">
+            This form uses EmailJS to send a message straight to Usama’s inbox. For sensitive data,
+            use a direct email instead.
+          </p>
+          <button class="btn-form" type="submit">Send message</button>
+        </form>
+      </div>
     </section>
   </main>
 
   <footer>
-    &copy; <span id="year"></span> Usama Ikhlaq. All rights reserved.
+    <span>&copy; <span id="year"></span> Usama Ikhlaq. All rights reserved.</span>
+    <span>Current focus: data mining, machine learning, teaching and research support.</span>
   </footer>
 
   <script>
+    // Year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple scroll-in animation
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Light dynamic line in hero sub-text
+    const phrases = [
+      "Practical models built on real constraints.",
+      "Data, models and servers working together.",
+      "Large-scale mining with simple end views.",
+      "Support across analysis, teaching and IT."
+    ];
+    const subEl = document.getElementById('hero-typed');
+    let idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % phrases.length;
+      subEl.style.opacity = 0;
+      setTimeout(() => {
+        subEl.textContent = phrases[idx];
+        subEl.style.opacity = 1;
+      }, 260);
+    }, 5200);
+
+    // EmailJS init with your public key
+    (function () {
+      emailjs.init("NQCuF9-S__FEhz4G_");
+    })();
+
+    // EmailJS contact form handler
+    function handleForm(form) {
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+
+      if (!email || !message) {
+        alert("Please add at least your email and a short message.");
+        return false;
+      }
+
+      const templateParams = {
+        name: name,
+        email: email,
+        message: message
+      };
+
+      emailjs
+        .send("service_m52t9fv", "template_35olsp", templateParams)
+        .then(function () {
+          alert("Thanks for reaching out — your message is now with Usama and will be read shortly.");
+          form.reset();
+        })
+        .catch(function (error) {
+          console.error("EmailJS error:", error);
+          alert("Sorry, something went wrong. Please email usamaikhlaq@gmail.com directly.");
+        });
+
+      // Stop normal form submit
+      return false;
+    }
   </script>
 </body>
 </html>
