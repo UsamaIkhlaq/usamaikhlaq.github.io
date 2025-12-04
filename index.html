@@ -824,77 +824,50 @@
   </footer>
 
   <script>
-    // Year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
+  // EmailJS init (v4 style)
+  (function () {
+    emailjs.init({
+      publicKey: "NQCuF9-S__FEhz4G_",
+    });
+  })();
 
-    // Simple scroll-in animation
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  function handleForm(form) {
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
 
-    // Light dynamic line in hero sub-text
-    const phrases = [
-      "Practical models built on real constraints.",
-      "Data, models and servers working together.",
-      "Large-scale mining with simple end views.",
-      "Support across analysis, teaching and IT."
-    ];
-    const subEl = document.getElementById('hero-typed');
-    let idx = 0;
-    setInterval(() => {
-      idx = (idx + 1) % phrases.length;
-      subEl.style.opacity = 0;
-      setTimeout(() => {
-        subEl.textContent = phrases[idx];
-        subEl.style.opacity = 1;
-      }, 260);
-    }, 5200);
-
-    // EmailJS init with your public key
-    (function () {
-      emailjs.init("NQCuF9-S__FEhz4G_");
-    })();
-
-    // EmailJS contact form handler
-    function handleForm(form) {
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      const message = form.message.value.trim();
-
-      if (!email || !message) {
-        alert("Please add at least your email and a short message.");
-        return false;
-      }
-
-      const templateParams = {
-        name: name,
-        email: email,
-        message: message
-      };
-
-      emailjs
-        .send("service_m52t9fv", "template_35olsp", templateParams)
-        .then(function () {
-          alert("Thanks for reaching out — your message is now with Usama and will be read shortly.");
-          form.reset();
-        })
-        .catch(function (error) {
-          console.error("EmailJS error:", error);
-          alert("Sorry, something went wrong. Please email usamaikhlaq@gmail.com directly.");
-        });
-
-      // Stop normal form submit
+    if (!email || !message) {
+      alert("Please add at least your email and a short message.");
       return false;
     }
-  </script>
+
+    const templateParams = {
+      name: name,
+      email: email,
+      message: message
+    };
+
+    emailjs
+      .send("service_m52t9fv", "template_35olsp", templateParams)
+      .then(function () {
+        alert(
+          "Thanks for reaching out — your message is now with Usama and will be read shortly."
+        );
+        form.reset();
+      })
+      .catch(function (error) {
+        console.error("EmailJS error:", error);
+        alert(
+          "EmailJS error:\n" +
+          (error.text || JSON.stringify(error)) +
+          "\n\nPlease also feel free to email usamaikhlaq@gmail.com directly."
+        );
+      });
+
+    return false;
+  }
+</script>
+
 </body>
 </html>
+
